@@ -12,13 +12,10 @@ namespace PlaneDestroyer
 
     private LevelSplineManager _levelSplineManager;
 
-    private void OnEnable()
-    {
-      _levelSplineManager = LevelSplineManager.Instance;
-    }
-
     private void Start()
     {
+      _levelSplineManager = LevelSplineManager.Instance;
+
       SetSpline();
     }
 

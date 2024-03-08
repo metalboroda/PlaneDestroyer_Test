@@ -42,7 +42,7 @@ namespace PlaneDestroyer
         Vector3 clampedPosition = new Vector3(clampedX, clampedY, _playerTransform.position.z);
 
         _playerTransform.position = Vector3.Lerp(_playerTransform.position, clampedPosition,
-          Time.deltaTime * _movementSpeed);
+          Time.deltaTime * _movementSpeed / 2);
         _recenteredTimer = 0;
       }
       else
