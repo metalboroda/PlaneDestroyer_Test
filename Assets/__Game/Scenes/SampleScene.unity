@@ -1275,8 +1275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  clamping: {x: 5, y: 5}
-  recenteringDelay: 1
+  friction: 2
+  clamping: {x: 15, y: 15}
+  recenteringDelay: 3
   recenteringSpeed: 1
 --- !u!114 &1287133621
 MonoBehaviour:

@@ -6,6 +6,7 @@ namespace PlaneDestroyer
   public class PlayerMovement : MonoBehaviour
   {
     [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] private float friction = 0.2f;
     [SerializeField] private Vector2 clamping;
     [SerializeField] private float recenteringDelay = 1f;
     [SerializeField] protected float recenteringSpeed = 1f;
@@ -25,7 +26,7 @@ namespace PlaneDestroyer
       _playerSplineHandler = GetComponent<PlayerSplineHandler>();
       _playerInputHandler = GetComponent<PlayerInputHandler>();
       _playerMovementComponent = new(
-        movementSpeed, clamping, recenteringDelay,
+        movementSpeed, friction, clamping, recenteringDelay,
         transform);
     }
 
@@ -47,6 +48,7 @@ namespace PlaneDestroyer
     private void Update()
     {
       _playerMovementComponent.Move(_playerInputHandler.MoveAxis());
+      _playerMovementComponent.Inertia();
     }
 
     private void MoveAlongSpline(SplineComputer spline)

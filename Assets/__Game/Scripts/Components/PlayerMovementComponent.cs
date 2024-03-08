@@ -4,22 +4,24 @@ namespace PlaneDestroyer
 {
   public class PlayerMovementComponent
   {
+    private float _movementSpeed;
+    private float _friction;
+    private Vector2 _clamping;
+    private float _recenteringDelay;
+    private Transform _playerTransform;
+
+    private Vector3 _velocity;
+
     public PlayerMovementComponent(
-      float movementSpeed, Vector2 clamping, float recenteringDelay,
-      Transform playerTransform)
+        float movementSpeed, float friction, Vector2 clamping, float recenteringDelay,
+        Transform playerTransform)
     {
       _movementSpeed = movementSpeed;
+      _friction = friction;
       _clamping = clamping;
       _recenteringDelay = recenteringDelay;
       _playerTransform = playerTransform;
     }
-
-    #region Constructor variables
-    private float _movementSpeed;
-    private Vector2 _clamping;
-    private float _recenteringDelay;
-    private Transform _playerTransform;
-    #endregion
 
     private float _recenteredTimer;
 
@@ -29,12 +31,18 @@ namespace PlaneDestroyer
       {
         // Movement
         Vector3 movementDirection = new Vector3(axis.x, axis.y, 0).normalized;
-        Vector3 newPosition = _playerTransform.position + movementDirection * _movementSpeed * Time.deltaTime;
 
-        newPosition.x = Mathf.Clamp(newPosition.x, -_clamping.x, _clamping.x);
-        newPosition.y = Mathf.Clamp(newPosition.y, -_clamping.y, _clamping.y);
+        _velocity = movementDirection * _movementSpeed * Time.deltaTime;
 
-        _playerTransform.position = newPosition;
+        Vector3 newPosition = _playerTransform.position + _velocity;
+
+        float clampedX = Mathf.Clamp(newPosition.x, -_clamping.x, _clamping.x);
+        float clampedY = Mathf.Clamp(newPosition.y, -_clamping.y, _clamping.y);
+
+        Vector3 clampedPosition = new Vector3(clampedX, clampedY, _playerTransform.position.z);
+
+        _playerTransform.position = Vector3.Lerp(_playerTransform.position, clampedPosition,
+          Time.deltaTime * _movementSpeed);
         _recenteredTimer = 0;
       }
       else
@@ -46,11 +54,31 @@ namespace PlaneDestroyer
 
         if (_recenteredTimer >= _recenteringDelay)
         {
-          Vector3 newPosition = Vector3.MoveTowards(_playerTransform.position, recenteringPosition, 
-            _movementSpeed * Time.deltaTime);
+          float distanceToCenter = Vector3.Distance(_playerTransform.position, recenteringPosition);
+          float recenteringSpeed = Mathf.Lerp(0, _movementSpeed, distanceToCenter / (_clamping.magnitude * 0.5f));
+
+          Vector3 newPosition = Vector3.MoveTowards(_playerTransform.position, recenteringPosition,
+              recenteringSpeed * Time.deltaTime);
 
           _playerTransform.position = newPosition;
         }
+      }
+    }
+
+    public void Inertia()
+    {
+      if (_velocity.magnitude > 0)
+      {
+        float friction = _friction;
+
+        _velocity -= _velocity * friction * Time.deltaTime;
+
+        Vector3 newPosition = _playerTransform.position + _velocity;
+
+        newPosition.x = Mathf.Clamp(newPosition.x, -_clamping.x, _clamping.x);
+        newPosition.y = Mathf.Clamp(newPosition.y, -_clamping.y, _clamping.y);
+
+        _playerTransform.position = newPosition;
       }
     }
   }
