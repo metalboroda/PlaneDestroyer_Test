@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 517735172572404939}
   - component: {fileID: 3494941677245191022}
   - component: {fileID: 1685597203499362212}
+  - component: {fileID: 26573286430259764}
   m_Layer: 0
   m_Name: SM_Veh_Plane_German_01
   m_TagString: Untagged
@@ -262,6 +263,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &26573286430259764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892994524351497841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e889e75a5af6b7445a5dd247975eb392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotorObject: {fileID: 7753693533205496065}
+  rotationSpeed: 1000
+  rotationDirection: {x: 0, y: 0, z: 360}
 --- !u!1 &1279065788121578253
 GameObject:
   m_ObjectHideFlags: 0

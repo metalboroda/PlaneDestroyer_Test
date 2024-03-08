@@ -759,6 +759,7 @@ GameObject:
   - component: {fileID: 3602901346756136502}
   - component: {fileID: 409766246039552403}
   - component: {fileID: 2471138584673056089}
+  - component: {fileID: 2436988569768970623}
   m_Layer: 0
   m_Name: SM_Veh_Plane_American_01
   m_TagString: Untagged
@@ -849,6 +850,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2436988569768970623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4128607901279147148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e889e75a5af6b7445a5dd247975eb392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotorObject: {fileID: 2002207967394209866}
+  rotationSpeed: 1000
+  rotationDirection: {x: 0, y: 0, z: 360}
 --- !u!1 &4276728977815538452
 GameObject:
   m_ObjectHideFlags: 0
