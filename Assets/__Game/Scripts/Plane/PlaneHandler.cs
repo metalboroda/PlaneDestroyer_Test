@@ -55,5 +55,10 @@ namespace PlaneDestroyer
       planeModel.transform.rotation = Quaternion.Lerp(planeModel.transform.rotation, targetRotation,
         planeRotationSpeed * Time.deltaTime);
     }
+
+    private void RotateWingsFlaps(Vector2 axis)
+    {
+
+    }
   }
 }
