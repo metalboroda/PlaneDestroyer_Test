@@ -1,4 +1,4 @@
-using Dreamteck.Splines;
+﻿using Dreamteck.Splines;
 using UnityEngine;
 
 namespace PlaneDestroyer
@@ -55,16 +55,6 @@ namespace PlaneDestroyer
     {
       _splineFollower.spline = spline;
       _splineFollower.followSpeed = movementSpeed;
-    }
-
-    public Vector2 GetMovementDirection()
-    {
-      Vector3 currentVelocity = (transform.position - _previousPosition) / Time.deltaTime;
-      Vector2 movementDirection = new Vector2(currentVelocity.x, currentVelocity.y).normalized;
-
-      _previousPosition = transform.position;
-
-      return movementDirection;
     }
   }
 }
