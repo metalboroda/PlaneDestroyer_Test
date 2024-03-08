@@ -6,16 +6,27 @@ namespace PlaneDestroyer
   public class PlayerMovement : MonoBehaviour
   {
     [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] private Vector2 clamping;
+    [SerializeField] private float recenteringDelay = 1f;
+    [SerializeField] protected float recenteringSpeed = 1f;
+
+    private Vector3 _previousPosition;
 
     private SplineFollower _splineFollower;
 
     private PlayerSplineHandler _playerSplineHandler;
+    private PlayerInputHandler _playerInputHandler;
+    private PlayerMovementComponent _playerMovementComponent;
 
     private void Awake()
     {
       _splineFollower = GetComponent<SplineFollower>();
 
       _playerSplineHandler = GetComponent<PlayerSplineHandler>();
+      _playerInputHandler = GetComponent<PlayerInputHandler>();
+      _playerMovementComponent = new(
+        movementSpeed, clamping, recenteringDelay,
+        transform);
     }
 
     private void OnEnable()
@@ -28,10 +39,30 @@ namespace PlaneDestroyer
       _playerSplineHandler.SplineSetted -= MoveAlongSpline;
     }
 
-    public void MoveAlongSpline(SplineComputer spline)
+    private void Start()
+    {
+      _previousPosition = transform.position;
+    }
+
+    private void Update()
+    {
+      _playerMovementComponent.Move(_playerInputHandler.MoveAxis());
+    }
+
+    private void MoveAlongSpline(SplineComputer spline)
     {
       _splineFollower.spline = spline;
       _splineFollower.followSpeed = movementSpeed;
+    }
+
+    public Vector2 GetMovementDirection()
+    {
+      Vector3 currentVelocity = (transform.position - _previousPosition) / Time.deltaTime;
+      Vector2 movementDirection = new Vector2(currentVelocity.x, currentVelocity.y).normalized;
+
+      _previousPosition = transform.position;
+
+      return movementDirection;
     }
   }
 }
