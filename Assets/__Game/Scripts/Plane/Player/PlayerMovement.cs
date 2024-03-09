@@ -60,8 +60,6 @@ namespace PlaneDestroyer
 
       _playerMovementComponent.Move(_playerInputHandler.MoveAxis());
       _playerMovementComponent.Inertia();
-
-      Debug.Log(MovementDirection());
     }
 
     private void UpdateResetTimer()

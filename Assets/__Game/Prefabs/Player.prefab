@@ -1616,7 +1616,7 @@ MonoBehaviour:
   movementSpeed: 5
   friction: 2
   clamping: {x: 15, y: 15}
-  recenteringDelay: 3
+  recenteringDelay: 10
   recenteringSpeed: 1
 --- !u!114 &7227839458708300263
 MonoBehaviour:
@@ -1655,7 +1655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingInterval: 0.15
-  muzzleFireVFX: {fileID: 3232289855780432030, guid: 1d637701e2c3c514ca904aaddb4cc7f8,
+  muzzleFireVFX: {fileID: 7646144486696227648, guid: 96afc6f5421de8745812faaec9c28b32,
     type: 3}
 --- !u!1 &6637505999550727005
 GameObject:
