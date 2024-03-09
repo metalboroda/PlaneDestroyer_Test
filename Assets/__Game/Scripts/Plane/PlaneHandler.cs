@@ -24,11 +24,11 @@ namespace PlaneDestroyer
     [SerializeField] private float planeRotationXMultiplier = 5;
     [SerializeField] private float planeRotationZMultiplier = 5;
 
-    private PlayerInputHandler _playerInputHandler;
+    private PlayerMovement _playerMovement;
 
     private void Awake()
     {
-      _playerInputHandler = GetComponent<PlayerInputHandler>();
+      _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -38,7 +38,7 @@ namespace PlaneDestroyer
 
     private void Update()
     {
-      RotatePlane(_playerInputHandler.MoveAxis());
+      RotatePlane(_playerMovement.MovementDirection());
     }
 
     private void RotateRotor()
