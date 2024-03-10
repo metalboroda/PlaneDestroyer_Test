@@ -14,13 +14,13 @@ namespace PlaneDestroyer
 
     public PlaneMovementComponent(
         float movementSpeed, float friction, Vector2 clamping, float recenteringDelay,
-        Transform playerTransform)
+        Transform planeTransform)
     {
       _movementSpeed = movementSpeed;
       _friction = friction;
       _clamping = clamping;
       _recenteringDelay = recenteringDelay;
-      _playerTransform = playerTransform;
+      _playerTransform = planeTransform;
     }
 
     private float _recenteredTimer;

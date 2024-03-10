@@ -24,11 +24,11 @@ namespace PlaneDestroyer
     [SerializeField] private float planeRotationXMultiplier = 20f;
     [SerializeField] private float planeRotationZMultiplier = 20f;
 
-    private PlayerMovement _playerMovement;
+    private PlaneMovement _planeMovement;
 
     private void Awake()
     {
-      _playerMovement = GetComponent<PlayerMovement>();
+      _planeMovement = GetComponent<PlaneMovement>();
     }
 
     private void Start()
@@ -38,13 +38,16 @@ namespace PlaneDestroyer
 
     private void Update()
     {
-      RotatePlane(_playerMovement.MovementDirection());
+      RotatePlane(_planeMovement.MovementDirection());
     }
 
     private void RotateRotor()
     {
-      propeller.transform.DOLocalRotate(rotationDirection, rotationSpeed,
-        RotateMode.FastBeyond360).SetSpeedBased(true).SetLoops(-1, LoopType.Incremental);
+      if (transform != null)
+      {
+        propeller.transform.DOLocalRotate(rotationDirection, rotationSpeed,
+          RotateMode.FastBeyond360).SetSpeedBased(true).SetLoops(-1, LoopType.Incremental);
+      }
     }
 
     private void RotatePlane(Vector2 axis)

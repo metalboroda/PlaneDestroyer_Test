@@ -696,7 +696,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4449152907843025157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 45.000004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1026,6 +1026,8 @@ GameObject:
   - component: {fileID: 8717943699150867815}
   - component: {fileID: 1892444281183385303}
   - component: {fileID: 3276299265814106766}
+  - component: {fileID: 2078719556216506110}
+  - component: {fileID: 1115128096150852068}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -1132,8 +1134,8 @@ MonoBehaviour:
     _baseScale: {x: 1, y: 1, z: 1}
     _2dMode: 0
     velocityHandleMode: 0
-    applyPositionX: 1
-    applyPositionY: 1
+    applyPositionX: 0
+    applyPositionY: 0
     applyPositionZ: 1
     applyPosition2D: 1
     retainLocalPosition: 0
@@ -1168,7 +1170,7 @@ MonoBehaviour:
   followMode: 0
   autoStartPosition: 0
   _follow: 1
-  _startPosition: 0.15000000596046448
+  _startPosition: 0.20000000298023224
   preserveUniformSpeedWithOffset: 0
   _followSpeed: 5
   _followDuration: 1
@@ -1195,6 +1197,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+--- !u!114 &2078719556216506110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7525740802130766968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080444c82df374e4180cbae58df2c03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementSpeed: 20
+  Friction: 5
+  Clamping: {x: 15, y: 15}
+  RecenteringDelay: 10
+  RecenteringSpeed: 1
+--- !u!114 &1115128096150852068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7525740802130766968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371c5a2a04c62704d877b85ec4f3242f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeModel: {fileID: 4449152907843025157}
+  propeller: {fileID: 6503402400525794933}
+  leftWingFlap: {fileID: 0}
+  rightWingFlap: {fileID: 0}
+  leftTailFlap: {fileID: 0}
+  rightTailFlap: {fileID: 0}
+  centerTailFlap: {fileID: 0}
+  rotationSpeed: 1000
+  rotationDirection: {x: 0, y: 0, z: 360}
+  planeRotationSpeed: 250
+  planeRotationXMultiplier: 150
+  planeRotationZMultiplier: 150
 --- !u!1 &7897173662646066606
 GameObject:
   m_ObjectHideFlags: 0
