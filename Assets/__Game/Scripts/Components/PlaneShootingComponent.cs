@@ -59,18 +59,18 @@ namespace PlaneDestroyer
           shootingPoint.transform.LookAt(hit.point);
         }
       }
-      else if (hit.distance <= _aimRayPoint.position.z + 0.1f)
+      else if (hit.distance <= _aimRayPoint.position.z)
       {
         foreach (var shootingPoint in _shootingPoints)
         {
-          shootingPoint.transform.rotation = Quaternion.identity;
+          shootingPoint.transform.localRotation = Quaternion.identity;
         }
       }
       else
       {
         foreach (var shootingPoint in _shootingPoints)
         {
-          shootingPoint.transform.rotation = Quaternion.LookRotation(aimDirection);
+          shootingPoint.transform.localRotation = Quaternion.identity;
         }
       }
     }
