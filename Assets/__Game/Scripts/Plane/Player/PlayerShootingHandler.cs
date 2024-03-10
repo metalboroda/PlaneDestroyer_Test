@@ -8,7 +8,10 @@ namespace PlaneDestroyer
   public class PlayerShootingHandler : MonoBehaviour
   {
     [SerializeField] private WeaponSO weaponSO;
+
+    [Header("")]
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Transform _aimRayPoint;
 
     private List<ShootingPoint> _shootingPoints = new List<ShootingPoint>();
     private bool _canShoot = false;
@@ -34,6 +37,7 @@ namespace PlaneDestroyer
 
     private void Update()
     {
+      AdjustShootingPointsDirection();
       Shoot();
     }
 
@@ -61,11 +65,39 @@ namespace PlaneDestroyer
           {
             spawnedProjectile.Init(enemyLayer, shootingPoint.transform.position,
               shootingPoint.transform.rotation, null);
-            spawnedProjectile.InitProjectile(weaponSO.Projectile.Damage, weaponSO.Projectile.Speed);
+            spawnedProjectile.InitProjectile(weaponSO.Projectile.Power, weaponSO.Projectile.Speed);
           }
         }
 
         _lastShotTime = Time.time;
+      }
+    }
+
+    private void AdjustShootingPointsDirection()
+    {
+      RaycastHit hit;
+      Vector3 aimDirection = _aimRayPoint.forward;
+
+      if (Physics.Raycast(_aimRayPoint.position, aimDirection, out hit, Mathf.Infinity, enemyLayer))
+      {
+        foreach (var shootingPoint in _shootingPoints)
+        {
+          shootingPoint.transform.LookAt(hit.point);
+        }
+      }
+      else if (hit.distance <= _aimRayPoint.position.z + 0.1f)
+      {
+        foreach (var shootingPoint in _shootingPoints)
+        {
+          shootingPoint.transform.rotation = Quaternion.identity;
+        }
+      }
+      else
+      {
+        foreach (var shootingPoint in _shootingPoints)
+        {
+          shootingPoint.transform.rotation = Quaternion.LookRotation(aimDirection);
+        }
       }
     }
   }

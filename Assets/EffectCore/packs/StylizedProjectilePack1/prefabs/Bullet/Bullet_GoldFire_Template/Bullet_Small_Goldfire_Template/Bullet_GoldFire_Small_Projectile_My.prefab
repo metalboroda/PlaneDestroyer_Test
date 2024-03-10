@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 199822515480979474}
   - component: {fileID: 198737689383679476}
   - component: {fileID: 1250980387648936654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet_GoldFire_Small_Projectile_My
   m_TagString: FX
   m_Icon: {fileID: 0}
@@ -4873,9 +4873,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 3
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 2048
   impactType: {fileID: 11400000, guid: 67a9719c026ece34fb3a25eb2a99cd65, type: 2}
 --- !u!1 &1540588367011230
 GameObject:

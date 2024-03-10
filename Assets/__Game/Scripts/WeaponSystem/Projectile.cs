@@ -8,7 +8,7 @@ namespace PlaneDestroyer
     [SerializeField] private float destroyTime = 3f;
     [SerializeField] private ImpactType impactType;
 
-    private int _damage;
+    private int _power;
     private float _speed;
     private LayerMask _collisionLayer;
 
@@ -28,6 +28,13 @@ namespace PlaneDestroyer
         int triangleIndex = 0;
 
         _surfaceManager.HandleImpact(other.gameObject, hitPoint, hitNormal, impactType, triangleIndex);
+
+        if (other.TryGetComponent(out IDamageable damageable))
+        {
+          damageable.Damage(_power);
+        }
+
+        LeanPool.Despawn(gameObject);
       }
     }
 
@@ -50,9 +57,9 @@ namespace PlaneDestroyer
       _surfaceManager = SurfaceManager.Instance;
     }
 
-    public void InitProjectile(int damage, float speed)
+    public void InitProjectile(int power, float speed)
     {
-      _damage = damage;
+      _power = power;
       _speed = speed;
     }
 
