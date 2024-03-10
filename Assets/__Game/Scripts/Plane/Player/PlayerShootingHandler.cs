@@ -51,11 +51,18 @@ namespace PlaneDestroyer
           ParticleHandler spawnedMuzzleFlare = LeanPool.Spawn(weaponSO.MuzzleFlare);
           Projectile spawnedProjectile = LeanPool.Spawn(weaponSO.Projectile.Projectile);
 
-          spawnedMuzzleFlare.Init(shootingPoint.transform.position,
-             shootingPoint.transform.rotation, shootingPoint.transform);
-          spawnedProjectile.Init(enemyLayer ,shootingPoint.transform.position, 
-            shootingPoint.transform.rotation, null);
-          spawnedProjectile.InitProjectile(weaponSO.Projectile.Damage, weaponSO.Projectile.Speed);
+          if (spawnedMuzzleFlare != null)
+          {
+            spawnedMuzzleFlare.Init(shootingPoint.transform.position,
+               shootingPoint.transform.rotation, shootingPoint.transform);
+          }
+
+          if (spawnedProjectile != null)
+          {
+            spawnedProjectile.Init(enemyLayer, shootingPoint.transform.position,
+              shootingPoint.transform.rotation, null);
+            spawnedProjectile.InitProjectile(weaponSO.Projectile.Damage, weaponSO.Projectile.Speed);
+          }
         }
 
         _lastShotTime = Time.time;

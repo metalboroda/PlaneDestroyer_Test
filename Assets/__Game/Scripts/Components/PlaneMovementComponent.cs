@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PlaneDestroyer
 {
-  public class PlayerMovementComponent
+  public class PlaneMovementComponent
   {
     private float _movementSpeed;
     private float _friction;
@@ -12,7 +12,7 @@ namespace PlaneDestroyer
 
     private Vector3 _velocity;
 
-    public PlayerMovementComponent(
+    public PlaneMovementComponent(
         float movementSpeed, float friction, Vector2 clamping, float recenteringDelay,
         Transform playerTransform)
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PlaneDestroyer
 {
-  public class Projectile : MonoBehaviour
+  public class Projectile : MonoBehaviour, IPoolable
   {
     [SerializeField] private float destroyTime = 3f;
     [SerializeField] private ImpactType impactType;
@@ -19,11 +19,6 @@ namespace PlaneDestroyer
       Fly();
     }
 
-    private void Start()
-    {
-      LeanPool.Despawn(gameObject, destroyTime);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
       if (_collisionLayer == (_collisionLayer | (1 << other.gameObject.layer)))
@@ -36,8 +31,17 @@ namespace PlaneDestroyer
       }
     }
 
+    public void OnSpawn()
+    {
+      LeanPool.Despawn(gameObject, destroyTime);
+    }
 
-    public void Init(LayerMask enemyLayer ,Vector3 position, Quaternion rotation, Transform parent)
+    public void OnDespawn()
+    {
+    }
+
+
+    public void Init(LayerMask enemyLayer, Vector3 position, Quaternion rotation, Transform parent)
     {
       _collisionLayer = enemyLayer;
       transform.position = position;

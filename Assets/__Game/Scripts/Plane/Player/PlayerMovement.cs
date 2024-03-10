@@ -3,26 +3,12 @@ using UnityEngine;
 
 namespace PlaneDestroyer
 {
-  public class PlayerMovement : MonoBehaviour
+  public class PlayerMovement : PlaneMovement
   {
-    [SerializeField] private float movementSpeed = 1f;
-    [SerializeField] private float friction = 0.2f;
-    [SerializeField] private Vector2 clamping;
-    [SerializeField] private float recenteringDelay = 1f;
-    [SerializeField] protected float recenteringSpeed = 1f;
-
-    private Vector3 _previousPosition;
-    private Vector3 _currentPosition;
-    private float _resetInterval = 1f;
-    private float _resetDuration = 1f;
-    private float _resetTimer = 0f;
-    private Vector3 resetStartPosition;
-    private Vector3 resetEndPosition;
-
     private SplineFollower _splineFollower;
     private PlayerSplineHandler _playerSplineHandler;
     private PlayerInputHandler _playerInputHandler;
-    private PlayerMovementComponent _playerMovementComponent;
+    private PlaneMovementComponent _planeMovementComponent;
 
     private void Awake()
     {
@@ -35,8 +21,8 @@ namespace PlaneDestroyer
 
       _playerSplineHandler = GetComponent<PlayerSplineHandler>();
       _playerInputHandler = GetComponent<PlayerInputHandler>();
-      _playerMovementComponent = new PlayerMovementComponent(
-          movementSpeed, friction, clamping, recenteringDelay, transform);
+      _planeMovementComponent = new PlaneMovementComponent(
+          MovementSpeed, Friction, Clamping, RecenteringDelay, transform);
     }
 
     private void OnEnable()
@@ -51,38 +37,38 @@ namespace PlaneDestroyer
 
     private void Start()
     {
-      _previousPosition = transform.position;
+      PreviousPosition = transform.position;
     }
 
     private void Update()
     {
       UpdateResetTimer();
 
-      _playerMovementComponent.Move(_playerInputHandler.MoveAxis());
-      _playerMovementComponent.Inertia();
+      _planeMovementComponent.Move(_playerInputHandler.MoveAxis());
+      _planeMovementComponent.Inertia();
     }
 
     private void UpdateResetTimer()
     {
-      if (Time.time - _resetTimer >= _resetInterval)
+      if (Time.time - ResetTimer >= ResetInterval)
       {
-        _resetTimer = Time.time;
-        resetStartPosition = _previousPosition;
-        resetEndPosition = transform.position;
+        ResetTimer = Time.time;
+        ResetStartPosition = PreviousPosition;
+        ResetEndPosition = transform.position;
       }
     }
 
     private void MoveAlongSpline(SplineComputer spline)
     {
       _splineFollower.spline = spline;
-      _splineFollower.followSpeed = movementSpeed;
+      _splineFollower.followSpeed = MovementSpeed;
     }
 
     public Vector2 MovementDirection()
     {
-      _currentPosition = transform.position;
+      CurrentPosition = transform.position;
 
-      Vector3 movementDirection = _currentPosition - _previousPosition;
+      Vector3 movementDirection = CurrentPosition - PreviousPosition;
 
       if (Mathf.Approximately(movementDirection.x, 0f) && Mathf.Approximately(movementDirection.y, 0f))
       {
@@ -90,8 +76,8 @@ namespace PlaneDestroyer
       }
 
       movementDirection.Normalize();
-      _previousPosition = Vector3.Lerp(resetStartPosition, resetEndPosition,
-          Mathf.Clamp01((Time.time - _resetTimer) / _resetDuration));
+      PreviousPosition = Vector3.Lerp(ResetStartPosition, ResetEndPosition,
+          Mathf.Clamp01((Time.time - ResetTimer) / ResetDuration));
 
       return new Vector2(movementDirection.x, movementDirection.y);
     }
