@@ -1655,8 +1655,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 11400000, guid: eae5665d9a06c564fa872f35f581a01e, type: 2}
-  muzzleFireVFX: {fileID: 7646144486696227648, guid: 96afc6f5421de8745812faaec9c28b32,
-    type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &6637505999550727005
 GameObject:
   m_ObjectHideFlags: 0

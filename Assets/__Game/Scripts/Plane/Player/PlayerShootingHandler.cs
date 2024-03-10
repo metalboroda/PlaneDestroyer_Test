@@ -8,6 +8,7 @@ namespace PlaneDestroyer
   public class PlayerShootingHandler : MonoBehaviour
   {
     [SerializeField] private WeaponSO weaponSO;
+    [SerializeField] private LayerMask enemyLayer;
 
     private List<ShootingPoint> _shootingPoints = new List<ShootingPoint>();
     private bool _canShoot = false;
@@ -52,7 +53,8 @@ namespace PlaneDestroyer
 
           spawnedMuzzleFlare.Init(shootingPoint.transform.position,
              shootingPoint.transform.rotation, shootingPoint.transform);
-          spawnedProjectile.Init(shootingPoint.transform.position, shootingPoint.transform.rotation, null);
+          spawnedProjectile.Init(enemyLayer ,shootingPoint.transform.position, 
+            shootingPoint.transform.rotation, null);
           spawnedProjectile.InitProjectile(weaponSO.Projectile.Damage, weaponSO.Projectile.Speed);
         }
 
