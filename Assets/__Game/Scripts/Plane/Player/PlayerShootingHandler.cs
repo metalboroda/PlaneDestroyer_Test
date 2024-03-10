@@ -7,10 +7,7 @@ namespace PlaneDestroyer
 {
   public class PlayerShootingHandler : MonoBehaviour
   {
-    [SerializeField] private float shootingInterval = 0.15f;
-
-    [Header("")]
-    [SerializeField] private ParticleHandler muzzleFireVFX;
+    [SerializeField] private WeaponSO weaponSO;
 
     private List<ShootingPoint> _shootingPoints = new List<ShootingPoint>();
     private bool _canShoot = false;
@@ -46,14 +43,17 @@ namespace PlaneDestroyer
 
     private void Shoot()
     {
-      if (_canShoot && Time.time - _lastShotTime >= shootingInterval)
+      if (_canShoot && Time.time - _lastShotTime >= weaponSO.FireRate)
       {
         foreach (var shootingPoint in _shootingPoints)
         {
-          ParticleHandler spawnedFire = LeanPool.Spawn(muzzleFireVFX);
+          ParticleHandler spawnedMuzzleFlare = LeanPool.Spawn(weaponSO.MuzzleFlare);
+          Projectile spawnedProjectile = LeanPool.Spawn(weaponSO.Projectile.Projectile);
 
-          spawnedFire.Init(shootingPoint.transform.position,
+          spawnedMuzzleFlare.Init(shootingPoint.transform.position,
              shootingPoint.transform.rotation, shootingPoint.transform);
+          spawnedProjectile.Init(shootingPoint.transform.position, shootingPoint.transform.rotation, null);
+          spawnedProjectile.InitProjectile(weaponSO.Projectile.Damage, weaponSO.Projectile.Speed);
         }
 
         _lastShotTime = Time.time;

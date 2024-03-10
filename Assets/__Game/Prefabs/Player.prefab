@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454e702a66564154c9f7240b6d86cc7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingInterval: 0.15
+  weaponSO: {fileID: 11400000, guid: eae5665d9a06c564fa872f35f581a01e, type: 2}
   muzzleFireVFX: {fileID: 7646144486696227648, guid: 96afc6f5421de8745812faaec9c28b32,
     type: 3}
 --- !u!1 &6637505999550727005

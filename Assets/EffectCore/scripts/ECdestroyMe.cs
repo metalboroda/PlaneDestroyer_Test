@@ -1,26 +1,42 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Lean.Pool;
+using UnityEngine;
 
-public class ECdestroyMe : MonoBehaviour{
+namespace PlaneDestroyer
+{
+  public class ECdestroyMe : MonoBehaviour
+  {
+    [SerializeField] private bool poolable;
+    [SerializeField] private bool destroyWithDuration = true;
+    [SerializeField] private float deathtimer = 10;
 
-    float timer;
-    public float deathtimer = 10;
+    private float _deathTimerWithDuration;
 
+    private ParticleSystem _particleSystem;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    private void Awake()
     {
-        timer += Time.deltaTime;
+      _particleSystem = GetComponent<ParticleSystem>();
+    }
 
-        if(timer >= deathtimer)
-        {
-            Destroy(gameObject);
-        }
-	
-	}
+    void Start()
+    {
+      if (destroyWithDuration == true)
+      {
+        _deathTimerWithDuration = _particleSystem.main.duration;
+      }
+      else
+      {
+        _deathTimerWithDuration = deathtimer;
+      }
+
+      if (poolable == true)
+      {
+        LeanPool.Despawn(gameObject, _deathTimerWithDuration);
+      }
+      else
+      {
+        Destroy(gameObject, _deathTimerWithDuration);
+      }
+    }
+  }
 }
