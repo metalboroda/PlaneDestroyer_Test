@@ -1197,6 +1197,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  DamagedThreshold: 25
+  DamagedVFX: {fileID: 1707441736110878, guid: 069523494e6bdb449898a348a89fd6f5, type: 3}
+  DeathVFX: {fileID: 1879769179923522, guid: 6068fd796fb7cdb46a664470ad6613dc, type: 3}
 --- !u!114 &2078719556216506110
 MonoBehaviour:
   m_ObjectHideFlags: 0
