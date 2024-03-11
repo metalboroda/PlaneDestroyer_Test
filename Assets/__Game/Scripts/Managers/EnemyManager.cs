@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace PlaneDestroyer
 {
   public class EnemyManager : MonoBehaviour
   {
     private List<EnemyHandler> _enemies = new List<EnemyHandler>();
+
+    [Inject] private GameManager _gameManager;
 
     public void AddEnemy(EnemyHandler enemyHandler)
     {
@@ -53,6 +56,8 @@ namespace PlaneDestroyer
     {
       if (_enemies.Count == 0)
       {
+        _gameManager.ChangeState(GameStateEnum.Win);
+
         EventManager.RaiseLastEnemy();
       }
     }
