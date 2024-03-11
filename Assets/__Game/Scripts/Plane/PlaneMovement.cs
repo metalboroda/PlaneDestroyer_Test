@@ -5,6 +5,8 @@ namespace PlaneDestroyer
   public class PlaneMovement : MonoBehaviour
   {
     [SerializeField] protected float MovementSpeed = 5f;
+    [SerializeField] protected float SpeedOverTimeMultiplier = 0.1f;
+    [SerializeField] protected float SplineFollowingSpeed = 5f;
     [SerializeField] protected float Friction = 2f;
     [SerializeField] protected Vector2 Clamping = new Vector2(15, 15);
     [SerializeField] protected float RecenteringDelay = 10f;
@@ -44,6 +46,11 @@ namespace PlaneDestroyer
           Mathf.Clamp01((Time.time - ResetTimer) / ResetDuration));
 
       return new Vector2(movementDirection.x, movementDirection.y);
+    }
+
+    public float IncreaseSpeedOverTime(float speed)
+    {
+      return speed += SpeedOverTimeMultiplier * Time.deltaTime;
     }
   }
 }

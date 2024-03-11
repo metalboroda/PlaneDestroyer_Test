@@ -1857,6 +1857,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 5
+  SpeedOverTimeMultiplier: 0.1
+  SplineFollowingSpeed: 5
   Friction: 2
   Clamping: {x: 15, y: 15}
   RecenteringDelay: 10

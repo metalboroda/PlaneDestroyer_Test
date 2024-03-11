@@ -15,4 +15,4 @@ MonoBehaviour:
   <Projectile>k__BackingField: {fileID: 1250980387648936654, guid: a8799e4a66e987a4b8f14bff1469caac,
     type: 3}
   <Speed>k__BackingField: 75
-  <Power>k__BackingField: 1
+  <Power>k__BackingField: 2

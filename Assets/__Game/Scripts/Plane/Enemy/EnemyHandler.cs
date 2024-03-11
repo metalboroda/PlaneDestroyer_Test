@@ -1,10 +1,13 @@
 using Lean.Pool;
 using UnityEngine;
+using Zenject;
 
 namespace PlaneDestroyer
 {
   public class EnemyHandler : PlaneHandler
   {
+    [Inject] private EnemyManager _enemyManager;
+
     private void Awake()
     {
       PlaneDamageReceiver = GetComponentInChildren<PlaneDamageReceiver>();
@@ -18,6 +21,11 @@ namespace PlaneDestroyer
     private void OnDisable()
     {
       PlaneDamageReceiver.DamageTaken -= TakeDamage;
+    }
+
+    private void Start()
+    {
+      _enemyManager.AddEnemy(this);
     }
 
     protected override void TakeDamage(int damage)
@@ -37,6 +45,8 @@ namespace PlaneDestroyer
         {
           LeanPool.Despawn(CurrentDamagedVFX);
         }
+
+        _enemyManager.RemoveEnemy(this);
 
         SpawnDestroyVFX();
         Destroy(gameObject);

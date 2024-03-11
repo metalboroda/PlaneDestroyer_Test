@@ -45,12 +45,14 @@ namespace PlaneDestroyer
 
       _planeMovementComponent.Move(_playerInputHandler.MoveAxis());
       _planeMovementComponent.Inertia();
+
+      _splineFollower.followSpeed = IncreaseSpeedOverTime(_splineFollower.followSpeed);
     }
 
     private void MoveAlongSpline(SplineComputer spline)
     {
       _splineFollower.spline = spline;
-      _splineFollower.followSpeed = MovementSpeed;
+      _splineFollower.followSpeed = SplineFollowingSpeed;
     }
   }
 }
