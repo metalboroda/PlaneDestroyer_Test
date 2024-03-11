@@ -1265,7 +1265,7 @@ MonoBehaviour:
   centerTailFlap: {fileID: 0}
   rotationSpeed: 1000
   rotationDirection: {x: 0, y: 0, z: 360}
-  planeRotationSpeed: 500
+  planeRotationSpeed: 750
   planeRotationXMultiplier: 325
   planeRotationZMultiplier: 325
 --- !u!1 &7897173662646066606

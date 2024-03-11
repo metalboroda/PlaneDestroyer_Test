@@ -49,6 +49,7 @@ namespace PlaneDestroyer
         }
 
         EventManager.RaisePlayerIsDead();
+        EventManager.RaiseGameStateChanged(GameStateEnum.Lose);
         SpawnDestroyVFX();
         Destroy(gameObject);
       }
@@ -70,6 +71,7 @@ namespace PlaneDestroyer
       if (transform.position.z > _enemyManager.GetNearestEnemy(transform).position.z)
       {
         EventManager.RaisePlayerFutherThanEnemy();
+        EventManager.RaiseGameStateChanged(GameStateEnum.Lose);
       }
     }
   }

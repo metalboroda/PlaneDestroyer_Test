@@ -20,6 +20,8 @@ namespace PlaneDestroyer
       if (_enemies.Contains(enemyHandler))
       {
         _enemies.Remove(enemyHandler);
+
+        CheckForLastEnemy();
       }
     }
 
@@ -45,6 +47,14 @@ namespace PlaneDestroyer
       }
 
       return nearestEnemy.transform;
+    }
+
+    private void CheckForLastEnemy()
+    {
+      if (_enemies.Count == 0)
+      {
+        EventManager.RaiseLastEnemy();
+      }
     }
   }
 }
