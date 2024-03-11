@@ -848,6 +848,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8f371e3ca4aa347b6ee6fdd6612e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherPlaneLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &6503402400525794933
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +862,7 @@ GameObject:
   - component: {fileID: 3286157261355604683}
   - component: {fileID: 3619365472713239870}
   - component: {fileID: 7319341280631671797}
+  - component: {fileID: 8987673900672686910}
   m_Layer: 0
   m_Name: SM_Veh_Plane_German_01_Prop
   m_TagString: Untagged
@@ -931,6 +935,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8987673900672686910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503402400525794933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b6ac4120612984a932f0efdccd1098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shutterSpeed: 10
+  Samples: 50
+  SSB_Material: {fileID: 2100000, guid: eb1f8abc1fa9aa043b8046a60e9ffaa9, type: 2}
+  alphaOffset: 0
+  advancedSettings:
+    enableGPUInstancing: 1
+    subMaterialIndex: 0
+    unitLocalScale: 0
+    AngularVelocityCutoff: 0
 --- !u!1 &6867046893727902421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 20
+  SpeedOverTimeMultiplier: 0.1
+  SplineFollowingSpeed: 5
   Friction: 5
   Clamping: {x: 15, y: 15}
   RecenteringDelay: 10
@@ -1238,9 +1265,9 @@ MonoBehaviour:
   centerTailFlap: {fileID: 0}
   rotationSpeed: 1000
   rotationDirection: {x: 0, y: 0, z: 360}
-  planeRotationSpeed: 250
-  planeRotationXMultiplier: 150
-  planeRotationZMultiplier: 150
+  planeRotationSpeed: 500
+  planeRotationXMultiplier: 325
+  planeRotationZMultiplier: 325
 --- !u!1 &7897173662646066606
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ namespace PlaneDestroyer
 
     public void AddEnemy(EnemyHandler enemyHandler)
     {
-      if (_enemies.Contains(enemyHandler) == false)
+      if (!_enemies.Contains(enemyHandler))
       {
         _enemies.Add(enemyHandler);
       }
@@ -17,10 +17,34 @@ namespace PlaneDestroyer
 
     public void RemoveEnemy(EnemyHandler enemyHandler)
     {
-      if (_enemies.Contains(enemyHandler) == true)
+      if (_enemies.Contains(enemyHandler))
       {
         _enemies.Remove(enemyHandler);
       }
+    }
+
+    public Transform GetNearestEnemy(Transform transform)
+    {
+      if (_enemies.Count == 0)
+      {
+        return null;
+      }
+
+      EnemyHandler nearestEnemy = null;
+      float minDistance = float.MaxValue;
+
+      foreach (EnemyHandler enemy in _enemies)
+      {
+        float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+        if (distance < minDistance)
+        {
+          minDistance = distance;
+          nearestEnemy = enemy;
+        }
+      }
+
+      return nearestEnemy.transform;
     }
   }
 }

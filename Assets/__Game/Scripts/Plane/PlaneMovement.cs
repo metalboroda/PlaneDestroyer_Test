@@ -15,7 +15,7 @@ namespace PlaneDestroyer
     protected Vector3 PreviousPosition;
     protected Vector3 CurrentPosition;
     protected float ResetInterval = 1f;
-    protected float ResetDuration = 1f;
+    protected float ResetDuration = 3f;
     protected float ResetTimer = 0f;
     protected Vector3 ResetStartPosition;
     protected Vector3 ResetEndPosition;
